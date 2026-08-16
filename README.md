@@ -1,19 +1,18 @@
-# Financial Market Response to External Shocks
+# Market Shock Response
 
-This is an ongoing independent project exploring financial markets as
-dynamical systems.
+This project studies how stock markets respond to major external shocks.
 
-The project studies how market returns and volatility respond to major
-external shocks and investigates whether the subsequent behaviour can
-be described using simple response and relaxation models inspired by
-statistical physics.
+The analysis uses daily data for the NIFTY50, S&P 500 and FTSE100 from 2015 to 2024. Selected events include earthquakes, hurricanes, wildfires, a heatwave and the COVID-19 pandemic.
 
-The analysis uses historical market data and Python.
+For each event, the analysis looks at:
 
-## Tools
+- daily log returns
+- abnormal returns
+- cumulative abnormal returns (CAR)
+- short-term volatility
+- volatility amplification
+- post-event volatility relaxation
 
-Python, NumPy, Pandas, Matplotlib, SciPy and yfinance.
+The last part is an exploratory physics-inspired approach in which post-event volatility is fitted with an exponential relaxation model.
 
-## Status
-
-Ongoing independent study.
+This is a data-analysis project and not a stock-prediction or trading model.
