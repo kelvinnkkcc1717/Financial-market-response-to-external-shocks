@@ -1,0 +1,217 @@
+## Aim
+
+The aim of this project was to see how stock markets respond to major external shocks and whether the response can be described using a few simple quantities.
+
+I looked at the NIFTY50, S&P 500 and FTSE100 and selected eight events between 2015 and 2023:
+
+- Nepal earthquake
+- Kumamoto earthquakes
+- Hurricane Harvey
+- California wildfires
+- COVID-19 pandemic
+- Australia bushfire season
+- European heatwave
+- Hawaii wildfire
+
+For every event, I used a 20 trading-day period before the event as a reference period and then looked at the following 60 trading days.
+
+---
+
+## Method
+
+The market data were converted into daily log returns,
+
+    r(t) = ln[P(t) / P(t-1)]
+
+The mean return during the 20 trading days before the event was used as the baseline return.
+
+I then calculated the abnormal return as
+
+    abnormal return = return - baseline return
+
+The cumulative abnormal return (CAR) was calculated by summing the abnormal returns from the event onwards.
+
+I also calculated a 5-day rolling standard deviation of returns as a simple measure of short-term volatility.
+
+The pre-event volatility was used as the baseline volatility.
+
+Finally, I tried fitting the post-event volatility to
+
+    V(t) = V0 + A exp(-t/tau)
+
+where V0 is the baseline volatility, A is the size of the deviation from the baseline and tau is the characteristic time scale of the fitted relaxation.
+
+---
+
+## Results
+
+### Market returns around the events
+
+The individual event plots show that the market response is quite different from one event to another.
+
+The earthquake and hurricane examples generally do not show a large, consistent movement exactly at the event date. There are positive and negative movements on both sides of the event date, and in several cases the larger movements occur several days or weeks later.
+
+This is important because it means that an external event does not automatically produce an immediate large movement in the stock index.
+
+The COVID-19 event is different. The S&P 500 and FTSE100 show very large movements around the event date compared with their normal fluctuations. NIFTY50 also shows a strong increase in the size of the daily movements.
+
+The Australia bushfire examples also show relatively small movements around the event date followed by much larger movements later in the window. This makes the event date itself a poor description of the whole market response.
+
+---
+
+## Cumulative abnormal returns
+
+The CAR plots show more clearly whether the effect remains after the initial event.
+
+For NIFTY50, the COVID-19 event produces an initial negative movement followed by a strong recovery. By the end of the 60-day window, the cumulative abnormal return becomes strongly positive.
+
+The same general pattern is visible for the S&P 500 and FTSE100. The initial fall is followed by a large recovery, although the magnitude is different for each index.
+
+The natural-disaster events are much less consistent.
+
+For example, the NIFTY50 CAR for the California wildfires becomes increasingly negative during the later part of the window. In contrast, the European heatwave example shows a strong positive cumulative abnormal return after the event.
+
+The S&P 500 and FTSE100 also show different responses to the same events.
+
+Therefore, there does not seem to be one universal direction of response for all external shocks.
+
+---
+
+## Volatility response
+
+The volatility plots are useful because the direction of the market is not necessarily the most important feature of a shock.
+
+The COVID-19 event produces the clearest increase in volatility. The 5-day volatility rises well above the pre-event baseline around the event and remains elevated for some time.
+
+The numerical results also show strong volatility amplification for the COVID-19 cases.
+
+For NIFTY50, the maximum post-event volatility for COVID-19 was approximately 0.084 compared with a pre-event baseline of approximately 0.00575, giving an amplification of about 14.65.
+
+For the S&P 500, the corresponding amplification was about 3.13.
+
+For the FTSE100, it was about 2.12.
+
+The difference between these values is substantial, even though the underlying event was the same.
+
+This suggests that the response of a market to a shock depends not only on the shock itself but also on the market being considered.
+
+---
+
+## Event-day response is not always the largest response
+
+One thing that became clear from the analysis is that the return on the event day is often not the largest movement in the event window.
+
+For example, the COVID-19 event has a large response around the event, but other events show their largest movements many trading days after the event.
+
+This is particularly visible for some of the wildfire and bushfire cases.
+
+Therefore, looking only at the return on the event date would miss part of the response.
+
+This is one reason for using a 60-day post-event window.
+
+---
+
+## Recovery behaviour
+
+The recovery plots show that some events are followed by a movement back toward the previous level while others continue moving away from it.
+
+For the COVID-19 cases, there is a strong initial disturbance followed by a prolonged recovery in cumulative abnormal return.
+
+The natural-disaster cases are more mixed.
+
+Some CAR curves remain negative for much of the post-event period, while others move positive.
+
+This makes it difficult to describe all external shocks using a single recovery pattern.
+
+---
+
+## Physics-inspired relaxation
+
+The most physics-inspired part of the project is the attempt to describe the change in volatility using
+
+    V(t) = V0 + A exp(-t/tau)
+
+The idea is similar to a simple relaxation process: an external disturbance moves a system away from a reference state, and the system subsequently evolves toward that state.
+
+Here, the reference state is the pre-event volatility.
+
+The fitted relaxation time `tau` should be interpreted only as a characteristic time scale of the fitted curve. It should not be treated as a fundamental physical constant of the market.
+
+The financial data are much more complicated than a simple relaxation system. Other news and market events occur during the same period, and volatility itself is noisy.
+
+Because of this, the exponential fit is mainly a way of testing whether a simple physics-inspired description is useful.
+
+The R-squared value should also be considered when looking at an individual fit. A large relaxation time by itself does not mean that the market really follows an exponential relaxation process.
+
+---
+
+## Comparison between markets
+
+The three indices behave differently for the same event.
+
+For example, the COVID-19 event produces a strong response in all three markets, but the size of the volatility amplification is different.
+
+For natural disasters, the differences are even more obvious.
+
+The NIFTY50, S&P 500 and FTSE100 are exposed to different economies, sectors and sources of information. Therefore it is reasonable that the same external event does not produce identical responses.
+
+This comparison is one of the more useful parts of the project because it avoids treating the stock market as a single system.
+
+---
+
+## What the results suggest
+
+The main pattern I see is:
+
+    external shock
+          |
+          v
+    change in returns
+          |
+          v
+    increase/decrease in volatility
+          |
+          v
+    subsequent evolution or recovery
+
+The strength and duration of each stage are different for different events.
+
+The COVID-19 pandemic is the clearest example of a large system-wide disturbance.
+
+The natural disasters provide a different picture. Their responses are often weaker, delayed or inconsistent across markets.
+
+Therefore, the results do not support the idea that every external shock produces a simple predictable market response.
+
+Instead, they suggest that a shock-response framework can be useful for comparing different events and markets.
+
+---
+
+## Limitations
+
+There are several limitations to this analysis.
+
+First, the number of events is small.
+
+Second, some of the events do not have a well-defined starting time. A pandemic, wildfire season or heatwave can develop over many days, unlike an earthquake that has a relatively precise time.
+
+Third, many other things happen in financial markets around the same dates. The changes seen in the data cannot automatically be attributed to the selected event.
+
+Fourth, the baseline is estimated from only 20 trading days. A different baseline period could change the results.
+
+Fifth, the volatility measure is simply a 5-day rolling standard deviation. More advanced volatility models could give a different picture.
+
+Finally, the exponential relaxation model is descriptive. It does not prove that financial markets physically relax according to an exponential law.
+
+---
+
+## Conclusion
+
+The analysis shows that major external shocks can be associated with changes in both stock-market returns and volatility, but the response depends strongly on the event and the market.
+
+The COVID-19 pandemic produces the clearest and largest response in the data, with strong volatility amplification across all three indices.
+
+The natural-disaster events are much less uniform. Some show relatively small responses near the event date, while others show larger movements later in the observation window.
+
+The physics-inspired relaxation model provides a simple way of describing the time evolution of volatility after a disturbance. It is useful as an exploratory model, but the present results are not sufficient to claim a universal relaxation law.
+
+A larger event database, better event definitions and statistical testing would be needed before making stronger conclusions.
