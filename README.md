@@ -1,2 +1,17 @@
 # Financial-market-response-to-external-shocks
-A physics-inspired study of financial-market responses and relaxation following major external shocks using event-study and statistical methods.
+This is an ongoing independent project exploring financial markets as
+dynamical systems.
+
+The project studies how market returns and volatility respond to major
+external shocks and whether the subsequent behaviour can be described
+using simple physics-inspired response and relaxation models.
+
+The analysis uses historical financial data and Python.
+
+## Tools
+
+Python, NumPy, Pandas, Matplotlib, SciPy and yfinance.
+
+## Status
+
+Ongoing independent study.
